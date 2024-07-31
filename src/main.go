@@ -1,12 +1,9 @@
 package main
 
 import (
-	"example"
-	"log"
+	"cpuPercent"
 )
 
 func main() {
-	log.Println("hahaha ")
-	ret := example.Add(1, 2)
-	log.Println("ret:", ret)
+	cpuPercent.CalCpuInfo()
 }

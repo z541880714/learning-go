@@ -1,4 +1,4 @@
-module demo2
+module learning-go
 
 go 1.21.0
 
