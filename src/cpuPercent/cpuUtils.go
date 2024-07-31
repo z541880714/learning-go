@@ -11,22 +11,11 @@ import (
 	"github.com/shirou/gopsutil/v4/mem"
 )
 
-func CpuInfo() {
+func MemInfo() {
 	v, _ := mem.VirtualMemory()
-
-	c, _ := cpu.Info()
 	// almost every return value is a struct
 	fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", v.Total, v.Free, v.UsedPercent)
-
-	// convert to JSON. String() is also implemented
 	fmt.Println(v)
-
-	fmt.Print(c)
-
-	count_cpu, _ := cpu.Counts(false)
-	percents_cpu, _ := cpu.Percent(time.Second, true)
-	fmt.Print("cpu count:", count_cpu)
-	fmt.Print("cpu percents:", percents_cpu)
 
 }
 
@@ -56,7 +45,12 @@ func CalCpuInfo() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer func(f *os.File) {
+		err := f.Close()
+		if err != nil {
+			fmt.Print("error:", err)
+		}
+	}(f)
 
 	go func() {
 		for {
