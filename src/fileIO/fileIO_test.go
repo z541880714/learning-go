@@ -7,7 +7,13 @@ import (
 	"testing"
 )
 
+// init 函数自动优先执行... 不需要被调用..
+func init() {
+	fmt.Println("this is a init method .....")
+}
+
 func TestWriteFile(t *testing.T) {
+
 	f, _ := os.Create("test.txt")
 	defer func(f *os.File) {
 		err := f.Close()
